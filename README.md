@@ -1,20 +1,35 @@
 # ereefs-grid-shapefile
 Eric Lawrey - Australian Institute of Marine Science - 10 Feb 2020
 
-This repository contains scripts that create shapefile versions of the GBR1 and GBR4 grids used in the eReefs models. These shapefiles are useful for showing the extent and detail of the eReefs models. This conversion extracts polygons for the grid with one polygon per pixel. It does not extract the data from the NetCDF model data. 
+This repository contains scripts that create shapefile versions of the GBR1 and GBR4 grids used in the eReefs models. These shapefiles are useful for showing the extent and detail of the eReefs models. This conversion extracts polygons for the grid with one polygon per pixel. It does not extract the data from the NetCDF model data. It does however record the depth from the model (botz variable) with each polygon.
 
-# 1 - Convert eReefs grid in NetCDF file to shapefile polygon (1_grid2shapefile.R)
-This script converts the eReefs NetCDF data file into a shapefile that we can map in QGIS. It extracts a polygon for each of the grid cells. This script does not copy over all the NetCDF data, but instead only copies over the bathymetry of the grid cells to allow the 'wet' cells of the model to be visualised. The depth attribute (dfData) can be plotted to see where the wet cells in the model grid are.
+## Execution requirements
+To recreate this dataset you will need the following tools to be installed:
+ - R with ncdf4 and maptools libraries
+ - QGIS 
+and > 30 GB disk space to handled the downloaded eReefs NetCDF source data files.
 
-This script needs R to run an a NetCDF files from the eReefs THREDDS server. They are not included here due to their size (30GB). See 1_grid2shapefile.R for more details and links to these files.
+## Step 1 - Download GBR1 and GBR4 eReefs NetCDF files
+This dataset consists of shapefiles corresponding to the two grids (GBR1 and GBR4) used in eReefs modelling (https://ereefs.org.au). This conversion needs an example GBR4 and GBR1 NetCDF data file from which to extract the grids. These files are so large (> 30 GB) that they are not included in this repository and so must be downloaded from the original source at http://dapds00.nci.org.au/thredds/catalogs/fx3/catalog.html. This script does not care about the date of the files. It simply extracts the latitude and longitude grid and the botz (depth) variable from the files provided to it. For eReefs the grid doesn't vary over time and so only one file from a model run is necessary. Additionally the eReefs hydrodynamic (V2) and the eReefs biogeochemical models (v924, v2.x, v3.x) share a common model grid and so we only bother to extract the grid from the hydrodynamic model data files.
 
+Example files are:
+- GBR4: http://dapds00.nci.org.au/thredds/fileServer/fx3/gbr4_v2/gbr4_simple_2020-01.nc
+- GBR1: http://dapds00.nci.org.au/thredds/fileServer/fx3/gbr1_2.0/gbr1_simple_2020-01-14.nc
 
-# 2 - eReefs model boundary - Dissolve the shapefile polygon (2_grid_Boundary-poly.qgz, 2_Run-in-QGIS_Bounding-poly.py)
-In this step we calculate the boundary for each eReefs model. This polygon can be used to get an overview of where the eReefs models can be used, without the clutter of the grid. This is achieved by dissolving all the 'wet' cell polygons from step 1 into a single polygon that corresponds to the boundary. This script uses the processing capabilities of QGIS. To run this script you need QGIS installed. This script should be run from the Python Console in QGIS. To do so use the 'Show Editor' in the Python console, then 'Open script...', followed by 'Run Script'.
+These files should be saved in C:\temp for the script to access them. Alternatively the paths in the R script can be adjusted.
 
-The QGIS map file 2_grid_Boundary-poly.qgz is essentially blank and is used as a document to run the script in. It provides the path that the data files are referenced against.
+## Step 2 - Convert eReefs grid in NetCDF file to shapefile polygon (1_grid2shapefile.R)
+This script needs to be run in R with the ncdf4 and maptools libraries installed. These libraries can be installed by running the following in the R console:
 
+ install.packages(c("ncdf4", "maptools"))
 
-# Directories
+This script converts the eReefs NetCDF data file downloaded in Step 1 into a shapefile. It extracts a polygon for each of the grid cells. This script does not copy over all the NetCDF data, but instead only copies over the bathymetry of the grid cells (botz variable) to allow the 'wet' cells of the model to be visualised. The depth attribute is saved as the dfData attribute in the shapefile. It can be plotted to see where the wet cells in the model grid are.
+
+## Step 3 - eReefs model boundary - Dissolve the shapefile polygon (2_grid_Boundary-poly.qgz, 2_Run-in-QGIS_Bounding-poly.py)
+In this step we calculate the boundary for each eReefs model. These can be used to get an overview of where the eReefs models can be used, without the clutter of the grid being visualised. The boundary polygon is calculated by dissolving all the 'wet' cell polygons from step 2 into a single polygon. This script uses the processing capabilities of QGIS. To run this script you need QGIS installed. This script should be run from the Python Console in QGIS. To do so use the 'Show Editor' in the Python console, then 'Open script...', followed by 'Run Script'.
+
+The QGIS map file 2_grid_Boundary-poly.qgz is essentially a blank map and is used as a document to run the script in. Opening this QGIS map sets the working directory for the python script, ensuring that all the relative paths work correctly. 
+
+## Directories
 - export 
 	This directory contains the shapefiles of the eReefs grids generated by the 1_grid2shapefile.R and 2_Run-in-QGIS_Bounding-poly.py scripts 
