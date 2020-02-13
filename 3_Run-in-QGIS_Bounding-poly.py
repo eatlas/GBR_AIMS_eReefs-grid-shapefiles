@@ -21,9 +21,9 @@ def convertGrid2Boundary(gridShpFile, boundaryShpFile):
             {'INPUT':gridShpFile+'|layerid=0|subset=\"dfData\">0','FIELD':[],'OUTPUT':boundaryShpFile})
     
 convertGrid2Boundary(
-    gridShpPath+'/GBR_AIMS_eReefs-GBR4-hydro-grid_depth.shp', 
-    gridShpPath+'/GBR_AIMS_eReefs-GBR4-hydro-grid_boundary.shp')
+    gridShpPath+'/GBR_AIMS_eReefs-grid-shapefiles_GBR4-hydro-v2.shp', 
+    gridShpPath+'/GBR_AIMS_eReefs-grid-shapefiles_GBR4-hydro-v2_boundary.shp')
     
 convertGrid2Boundary(
-    gridShpPath+'/GBR_AIMS_eReefs-GBR1-hydro-grid_depth.shp', 
-    gridShpPath+'/GBR_AIMS_eReefs-GBR1-hydro-grid_boundary.shp')
+    gridShpPath+'/GBR_AIMS_eReefs-grid-shapefiles_GBR1-hydro-v2.shp', 
+    gridShpPath+'/GBR_AIMS_eReefs-grid-shapefiles_GBR1-hydro-v2_boundary.shp')

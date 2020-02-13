@@ -238,12 +238,12 @@ createDepthShpFile <- function (outname, ncfile) {
   }
 }
 
-outname <- 'export/GBR_AIMS_eReefs-GBR4-hydro-grid_depth'
+outname <- 'export/GBR_AIMS_eReefs-grid-shapefiles_GBR4-hydro-v2'
 print('===== Creating GBR 4 grid shapefile ====')
 createDepthShpFile(outname, gbr4ncfile)
 
 
-outname <- 'export/GBR_AIMS_eReefs-GBR1-hydro-grid_depth'
+outname <- 'export/GBR_AIMS_eReefs-grid-shapefiles_GBR1-hydro-v2'
 print('===== Creating GBR 1 grid shapefile ====')
 createDepthShpFile(outname, gbr1ncfile)
 
