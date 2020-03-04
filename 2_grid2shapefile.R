@@ -195,8 +195,15 @@ toPolygons <- function(lat, long, data) {
     rowData <- as.vector(row(lat))
     colData <- as.vector(col(lat))
     dfLatLong <- data.frame(row=rowData, col=colData)[goodboxIndicies,]
-    dfData <- data[goodboxIndicies,]
-    dataTable <- cbind(dfData,dfLatLong)
+    
+    # Using depth as the variable name here is a bit of a hack.
+    # This is the name of the variable that will appear in the final
+    # shapefile. Ideally this name would be passed in as a parameter
+    # to this function, however I could quite workout how to get this
+    # to work. In this script we are only extracting 'depth' so this
+    # hack is OK.
+    depth <- data[goodboxIndicies,]
+    dataTable <- cbind(depth,dfLatLong)
     row.names(dataTable) <- ID
     spp <- SpatialPolygonsDataFrame(polys,data=dataTable)
     print(paste("SpatialPolygonsDataFrame complete: ",round((proc.time()-pts)[3],1),"sec"))
