@@ -1,5 +1,5 @@
 # ereefs-grid-shapefile
-Eric Lawrey - Australian Institute of Marine Science - 10 Feb 2020
+Eric Lawrey - Australian Institute of Marine Science - 5 March 2020
 
 This repository contains scripts that create shapefile versions of the GBR1 and GBR4 grids used in the eReefs models. This repository's purpose is to facilitate recreation of the dataset. 
 
@@ -46,6 +46,9 @@ This script also calculates a low detail GeoJSON version of these boundary polyg
 ## Step 4 - Dataset preview maps (4_dataset-preview-map.qgz)
 The preview map for this dataset was created in QGIS using the 4_dataset-preview-map.qgz. Load this map in QGIS then open the Project/Layout Manager. Select the 'Dataset preview' then Layout/Export As Image...
 This map relies on a basemap from the eAtlas service.
+
+## Step 5 - Create the public dataset
+This involves downloading the latest metadata record for the dataset from https://eatlas.org.au/geonetwork/srv/eng/pdf?uuid=43ff162c-8132-41cd-8547-76a1acf58105 and saving it as metadata.pdf. Then zip up the entire dataset directory including the generated export files, images, code and metadata and saving this ZIP file as: GBR_AIMS_eReefs-grid-shapefiles.zip. 
 
 ## Generated Directories
 - export 
