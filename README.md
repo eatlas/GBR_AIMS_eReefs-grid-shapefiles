@@ -39,9 +39,11 @@ In this step we calculate the boundary for each eReefs model. These can be used 
 
 ![Loading 3_Run-in-QGIS_Bounding-poly.py to run in QGIS](/images/loading-script-qgis.jpg)
 
-The QGIS map file 2_grid_Boundary-poly.qgz is essentially a blank map and is used as a document to run the script in. Opening this QGIS map sets the working directory for the python script, ensuring that all the relative paths work correctly. 
+The QGIS map file 3_grid_Boundary-poly.qgz is essentially a blank map and is used as a document to run the script in. Opening this QGIS map sets the working directory for the python script, ensuring that all the relative paths work correctly. 
 
-This script also calculates a low detail GeoJSON version of these boundary polygons. These are intended to be used in the [AIMS eReefs extraction tool](https://extraction.ereefs.aims.gov.au) to detect points added by the user that are outside the model boundaries.
+This script also exports the boundary polygons as GeoJSON files. These are intended to be used in the [AIMS eReefs extraction tool](https://extraction.ereefs.aims.gov.au) to detect points added by the user that are outside the model boundaries.
+
+Furthermore, the script calculates a low detail GeoJSON version of the boundary polygons which reduces the file size significantly and can be used as a lightweight version.
 
 ## Step 4 - Dataset preview maps (4_dataset-preview-map.qgz)
 The preview map for this dataset was created in QGIS using the 4_dataset-preview-map.qgz. Load this map in QGIS then open the Project/Layout Manager. Select the 'Dataset preview' then Layout/Export As Image...
